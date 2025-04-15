@@ -6,8 +6,8 @@ import { BetChoice } from "./commons";
 const { ccclass } = _decorator;
 
 enum ColorResult {
-    head = "#032A98",
-    tail = "#C50D0D",
+    home = "#032A98",
+    away = "#C50D0D",
 }
 
 @ccclass()

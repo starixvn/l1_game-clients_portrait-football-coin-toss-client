@@ -250,7 +250,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 174.796875,
+      "width": 141.28125,
       "height": 60.480000000000004
     },
     "_anchorPoint": {
@@ -286,7 +286,7 @@
       "b": 152,
       "a": 255
     },
-    "_string": "HARRIS",
+    "_string": "HOME",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 44,
@@ -347,7 +347,7 @@
     "__prefab": {
       "__id__": 10
     },
-    "key": "CoinToss.glossary_head",
+    "key": "FootballCoinToss.glossary_home",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 111.3984375,
+      "width": 454.58984375,
       "height": 64
     },
     "_anchorPoint": {
@@ -432,8 +432,8 @@
     },
     "_alignFlags": 45,
     "_target": null,
-    "_left": 8.30078125,
-    "_right": 8.30078125,
+    "_left": -158.294921875,
+    "_right": -158.294921875,
     "_top": 3.9659999999999997,
     "_bottom": -3.9659999999999997,
     "_horizontalCenter": 0,
@@ -681,7 +681,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 128,
+      "width": 138,
       "height": 64
     },
     "_anchorPoint": {

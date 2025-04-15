@@ -1,18 +1,18 @@
 {
     "lobbyNames": {
-        "en": "SE DIE",
-        "id": "SE DIE",
-        "th": "SE DIE",
-        "vi": "XÓC ĐĨA",
-        "zh_cn": "色碟",
-        "zh_tw": "色碟"
+        "en": "Soccer Coin Toss",
+        "id": "Lempar Koin\nSepak Bola",
+        "th": "ฟุตบอลโยนเหรียญ",
+        "vi": "Tung Xu Bóng Đá",
+        "zh_cn": "足球掷币游戏",
+        "zh_tw": "足球擲幣遊戲"
     },
     "gameNames": {
-        "en": "Se Die",
-        "id": "Se Die",
-        "th": "Se Die",
-        "vi": "Xóc Đĩa",
-        "zh_cn": "色碟",
-        "zh_tw": "色碟"
+        "en": "Soccer Coin Toss",
+        "id": "Lempar Koin Sepak Bola",
+        "th": "ฟุตบอลโยนเหรียญ",
+        "vi": "Tung Xu Bóng Đá",
+        "zh_cn": "足球掷币游戏",
+        "zh_tw": "足球擲幣遊戲"
     }
 }
