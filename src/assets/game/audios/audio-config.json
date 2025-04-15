@@ -1,67 +1,58 @@
 {
-    "shake": {
+    "head_music": {
         "bundle": "resources",
-        "path": "shake",
         "isLazyLoad": true
     },
-    "odd_wins_zh_cn": {
+    "head_en": {
         "bundle": "resources",
-        "path": "winning/odd_wins_zh_cn",
         "isLazyLoad": true
     },
-    "odd_wins_en": {
+    "head_vi": {
         "bundle": "resources",
-        "path": "winning/odd_wins_en",
         "isLazyLoad": true
     },
-    "odd_wins_id": {
+    "head_th": {
         "bundle": "resources",
-        "path": "winning/odd_wins_id",
         "isLazyLoad": true
     },
-    "odd_wins_th": {
+    "head_id": {
         "bundle": "resources",
-        "path": "winning/odd_wins_th",
         "isLazyLoad": true
     },
-    "odd_wins_zh_tw": {
+    "head_zh_cn": {
         "bundle": "resources",
-        "path": "winning/odd_wins_zh_tw",
         "isLazyLoad": true
     },
-    "odd_wins_vi": {
+    "head_zh_tw": {
         "bundle": "resources",
-        "path": "winning/odd_wins_vi",
         "isLazyLoad": true
     },
-    "even_wins_zh_cn": {
+    "tail_en": {
         "bundle": "resources",
-        "path": "winning/even_wins_zh_cn",
         "isLazyLoad": true
     },
-    "even_wins_en": {
+    "tail_vi": {
         "bundle": "resources",
-        "path": "winning/even_wins_en",
         "isLazyLoad": true
     },
-    "even_wins_id": {
+    "tail_th": {
         "bundle": "resources",
-        "path": "winning/even_wins_id",
         "isLazyLoad": true
     },
-    "even_wins_th": {
+    "tail_id": {
         "bundle": "resources",
-        "path": "winning/even_wins_th",
         "isLazyLoad": true
     },
-    "even_wins_zh_tw": {
+    "tail_zh_cn": {
         "bundle": "resources",
-        "path": "winning/even_wins_zh_tw",
         "isLazyLoad": true
     },
-    "even_wins_vi": {
+    "tail_zh_tw": {
         "bundle": "resources",
-        "path": "winning/even_wins_vi",
+        "isLazyLoad": true
+    },
+    "tail_music": {
+        "bundle": "resources",
         "isLazyLoad": true
     }
 }

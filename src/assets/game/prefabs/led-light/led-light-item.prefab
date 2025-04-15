@@ -38,7 +38,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 22
+      "__id__": 20
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "8fef9c53-58c5-484c-ac20-c888cb9863d0@46de1",
+      "__uuid__": "8a801915-5eb8-4994-9d27-f06f014ade87@b9aca",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -183,7 +183,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": true,
+    "_isTrimmedMode": false,
     "_useGrayscale": false,
     "_atlas": null,
     "_id": ""
@@ -229,7 +229,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 0.5,
       "z": 0
     },
     "_lrot": {
@@ -269,8 +269,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30,
-      "height": 30
+      "width": 29,
+      "height": 29
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -389,7 +389,7 @@
     "fileId": "f8Ec7hY8lPrq/8z5pejdeV"
   },
   {
-    "__type__": "eb669RQ6uJEUry0v+qJhPEE",
+    "__type__": "417a7R1vvRJaYN/0HwsPxaP",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -406,35 +406,16 @@
     "highlight": {
       "__id__": 8
     },
-    "itemModel": [
-      {
-        "__id__": 20
-      },
-      {
-        "__id__": 21
-      }
-    ],
+    "itemModel": [],
+    "spriteAtlas": {
+      "__uuid__": "8a801915-5eb8-4994-9d27-f06f014ade87",
+      "__expectedType__": "cc.SpriteAtlas"
+    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "27/bfxvBVN1ZnLBmbX7pij"
-  },
-  {
-    "__type__": "LedLightItemModel",
-    "choiceNames": "odd",
-    "backgroundForChoice": {
-      "__uuid__": "8fef9c53-58c5-484c-ac20-c888cb9863d0@46de1",
-      "__expectedType__": "cc.SpriteFrame"
-    }
-  },
-  {
-    "__type__": "LedLightItemModel",
-    "choiceNames": "even",
-    "backgroundForChoice": {
-      "__uuid__": "8fef9c53-58c5-484c-ac20-c888cb9863d0@a8b4d",
-      "__expectedType__": "cc.SpriteFrame"
-    }
+    "fileId": "bdV7Q5xYBAZ6lN+Ch0NfE7"
   },
   {
     "__type__": "cc.PrefabInfo",
