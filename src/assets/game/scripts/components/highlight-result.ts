@@ -7,10 +7,10 @@ const { ccclass, property } = _decorator;
 @ccclass("HighlightResult")
 export class HighlightResult extends Component {
     @property(Node)
-    harris: Node = null;
+    head: Node = null;
 
     @property(Node)
-    trump: Node = null;
+    tail: Node = null;
 
     protected onLoad(): void {
         this.hide();
@@ -21,15 +21,15 @@ export class HighlightResult extends Component {
     }
 
     hide() {
-        this.setStatusNode(this.harris, false);
-        this.setStatusNode(this.trump, false);
+        this.setStatusNode(this.head, false);
+        this.setStatusNode(this.tail, false);
     }
 
     show(result: gc.GameServiceMessage.TResult) {
         const convertedResult = result as TResult;
-        const isHead = convertedResult?.head;
+        const isHome = convertedResult?.home;
 
-        this.setStatusNode(this.harris, isHead);
-        this.setStatusNode(this.trump, !isHead);
+        this.setStatusNode(this.head, isHome);
+        this.setStatusNode(this.tail, !isHome);
     }
 }

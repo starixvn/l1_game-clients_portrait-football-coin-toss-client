@@ -80,7 +80,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "progess-bar",
+    "_name": "progress-bar",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {

@@ -92,8 +92,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": -6.787,
+      "y": 10.662,
       "z": 0
     },
     "_lrot": {
@@ -105,8 +105,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 1.1,
+      "y": 1.1,
       "z": 1
     },
     "_mobility": 0,
@@ -170,10 +170,10 @@
       "a": 255
     },
     "_skeletonData": {
-      "__uuid__": "05d1f2c8-4207-4855-aedf-e8a0dcf6f751",
+      "__uuid__": "6b9cf01d-3870-4245-9fd3-bb9fdaae2e96",
       "__expectedType__": "sp.SkeletonData"
     },
-    "defaultSkin": "biden",
+    "defaultSkin": "default",
     "defaultAnimation": "settle",
     "_premultipliedAlpha": false,
     "_timeScale": 1,
@@ -534,7 +534,6 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null,
     "targetOverrides": null
   }
 ]

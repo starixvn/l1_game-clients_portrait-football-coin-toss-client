@@ -29,4 +29,10 @@ export class FlipCoin extends Component {
         this.hand && (this.hand.active = false);
         this.skeleton && (await AnimationUtils.playSpine(this.skeleton, this.animName, false, this.durationFlipCoin));
     }
+
+    setSkeletonData(skeletonData: sp.SkeletonData) {
+        if (this.skeleton) {
+            this.skeleton.skeletonData = skeletonData;
+        }
+    }
 }
