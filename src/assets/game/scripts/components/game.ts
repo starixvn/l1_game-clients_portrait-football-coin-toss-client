@@ -67,11 +67,6 @@ export default class Game extends GameComponent {
     @property(Node)
     nodeAudioContainer: Node = null;
 
-    @property(Node)
-    nodePlate: Node = null;
-
-    @property(Node)
-    nodeWinning: Node = null;
 
     //compPlate: Plate = null;
     // protected enableFixHandleFinish = true;
@@ -236,6 +231,7 @@ export default class Game extends GameComponent {
         this.highlightResult.show(result);
         this.playWinningSound();
         super.finishShowResult(result, settlementResult);
+        this.chipFlying.callActionPayChips();
     }
 
     async showResult(result: gc.GameServiceMessage.TResult, hasAnimation: boolean) {

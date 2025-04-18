@@ -5498,7 +5498,9 @@
     "highlightResultNode": {
       "__id__": 165
     },
-    "chipFlying": null,
+    "chipFlying": {
+      "__id__": 111
+    },
     "nodeAudioContainer": {
       "__id__": 286
     },
