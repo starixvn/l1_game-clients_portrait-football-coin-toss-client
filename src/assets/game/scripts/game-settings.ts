@@ -1,7 +1,7 @@
 import gc from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
-
 import { sharedContainer } from "../../scripts/shared-container";
+import * as Match from "../features/match";
 
 export const settings = {
     id: 93,
@@ -23,8 +23,6 @@ export const containerOptions: gc.IContainerOptions = {
         container.bind(gc.GameConfigs.GameSetting).toConstantValue(settings);
         container.bind(LogStore).to(LogStore);
     },
-    features: [...gc.defaultFeatures, 
-        //TODO: Remove this after testing
-        gc.BetDetailsNew, 
-        gc.RoundBasePF],
+
+    features: [Match, gc.BetDetailsNew, gc.RoundBasePF, ...gc.defaultFeatures],
 };
