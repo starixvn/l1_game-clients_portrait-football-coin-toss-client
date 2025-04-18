@@ -1,5 +1,5 @@
 
-mobile-winning-animation.png
+winning-animation.webp
 size: 1024,995
 format: RGBA8888
 filter: Linear,Linear
@@ -341,7 +341,7 @@ red-player/61
   offset: 69, 7
   index: -1
 
-mobile-winning-animation2.png
+winning-animation2.webp
 size: 1009,915
 format: RGBA8888
 filter: Linear,Linear

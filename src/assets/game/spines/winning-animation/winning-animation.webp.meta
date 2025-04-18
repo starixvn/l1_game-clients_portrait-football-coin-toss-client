@@ -5,13 +5,13 @@
   "uuid": "ba0dd465-78a8-453d-8d1c-2aeceda4b802",
   "files": [
     ".json",
-    ".png"
+    ".webp"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
       "uuid": "ba0dd465-78a8-453d-8d1c-2aeceda4b802@6c48a",
-      "displayName": "mobile-winning-animation",
+      "displayName": "winning-animation",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -35,7 +35,7 @@
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "ba0dd465-78a8-453d-8d1c-2aeceda4b802@f9941",
-      "displayName": "mobile-winning-animation",
+      "displayName": "winning-animation",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
