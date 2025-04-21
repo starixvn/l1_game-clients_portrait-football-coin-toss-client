@@ -1,6 +1,6 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
-import { MatchConfig } from "../../scripts/components/commons";
+import { LastMatchConfig, MatchConfig } from "../../scripts/components/commons";
 import { MatchStore } from "./match-store";
 export type MatchHistory = gc.RoundHistories.RoundHistory & {
     match: MatchConfig;
@@ -13,6 +13,7 @@ export class MatchHandler implements gc.Shared.IMultipleHandlers {
 
     handleUpdateMatch(match: MatchConfig) {
         this.store.match = match;
+        this.store.lastMatch = match;
     }
 
     handleLastMatch(roundHistories: MatchHistory[]) {
