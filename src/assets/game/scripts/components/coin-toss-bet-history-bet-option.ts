@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Color, Component, Label } from "cc";
+import { MatchConfig } from "./commons";
 
 const { property, ccclass } = _decorator;
 
@@ -13,16 +14,8 @@ export default class SeDieBetHistoryBetOption extends Component {
 
     protected convertChoiceData(choice: string): string {
         let betChoice = "";
-        const choiceData = ["even", "odd", "red2", "red3", "red4", "white3", "white4"];
-        const choiceStr = [
-            "glossary_even",
-            "glossary_odd",
-            "bet_option_red2",
-            "bet_option_red3",
-            "bet_option_red4",
-            "bet_option_white3",
-            "bet_option_white4",
-        ];
+        const choiceData = ["home", "away"];
+        const choiceStr = ["glossary_home", "glossary_away"];
         choiceData.forEach((item, index) => {
             if (choice === item) {
                 betChoice = choiceStr[index];
@@ -31,9 +24,10 @@ export default class SeDieBetHistoryBetOption extends Component {
         return betChoice;
     }
 
-    handleBetOptionItem(choice: string, odd: string, stake: string) {
+    handleBetOptionItem(choice: string, odd: string, stake: string, match: MatchConfig) {
         const choiceStr = this.convertChoiceData(choice);
-        this.choice.string = `${gc.Translator.gameTranslate(choiceStr)} @ ${odd}`;
+        const teamCode = match[choice];
+        this.choice.string = `${gc.Translator.gameTranslate(`glossary_${teamCode}`)} @ ${odd}`;
         this.stake.string = stake;
     }
 

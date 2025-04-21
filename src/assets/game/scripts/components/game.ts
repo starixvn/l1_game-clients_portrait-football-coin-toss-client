@@ -67,7 +67,6 @@ export default class Game extends GameComponent {
     @property(Node)
     nodeAudioContainer: Node = null;
 
-
     //compPlate: Plate = null;
     // protected enableFixHandleFinish = true;
     // private winningResult: WinningResult = null;

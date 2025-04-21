@@ -8,5 +8,4 @@ export class MatchConfig {
 }
 
 export class LastMatchConfig extends MatchConfig {
-    roundId: number;
-}
+ }
