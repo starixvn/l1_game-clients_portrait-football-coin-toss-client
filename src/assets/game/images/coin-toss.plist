@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{286,300}</string>
                 <key>textureRect</key>
-                <string>{{725,582},{286,300}}</string>
+                <string>{{725,608},{286,300}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -169,6 +169,21 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
+            <key>bg-table.webp</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{24,24}</string>
+                <key>spriteSourceSize</key>
+                <string>{24,24}</string>
+                <key>textureRect</key>
+                <string>{{986,222},{24,24}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>bg-time.webp</key>
             <dict>
                 <key>aliases</key>
@@ -225,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{358,25}</string>
                 <key>textureRect</key>
-                <string>{{986,222},{358,17}}</string>
+                <string>{{986,248},{358,17}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -270,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{191,229}</string>
                 <key>textureRect</key>
-                <string>{{620,884},{191,229}}</string>
+                <string>{{620,910},{191,229}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -453,7 +468,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:44c531f2dba972aeace3fa3defd0ccf8:21a24538263337ac703621b5005bbb95:8265a744d2c4a24cdfc36379518b9d21$</string>
+            <string>$TexturePacker:SmartUpdate:873b02fcab9ef17e12be10d228d9d096:463c3e57fc3ee4bf39c4e2704decafe7:8265a744d2c4a24cdfc36379518b9d21$</string>
             <key>textureFileName</key>
             <string>coin-toss.webp</string>
         </dict>

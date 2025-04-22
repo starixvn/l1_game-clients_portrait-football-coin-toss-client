@@ -286,7 +286,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -10,
+      "y": -14.86,
       "z": 0
     },
     "_lrot": {
@@ -517,6 +517,8 @@
       "__id__": 0
     },
     "fileId": "4fh0IEaMBAkZCe/484VE3x",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -578,9 +580,6 @@
     "__prefab": {
       "__id__": 27
     },
-    "dot": {
-      "__id__": 6
-    },
     "result": {
       "__id__": 12
     },
@@ -588,7 +587,7 @@
       "__uuid__": "a12525f6-6ace-4f3a-a698-02f31c3749b9",
       "__expectedType__": "cc.SpriteAtlas"
     },
-    "sprFlag": {
+    "flagSprite": {
       "__id__": 6
     },
     "_id": ""
@@ -606,6 +605,7 @@
       "__id__": 0
     },
     "fileId": "49d8/3aGNJlYMzkvpJWFF2",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "5fc7896f-cdfb-4ab4-a360-00bfec820855",
+  "uuid": "1f72619b-7618-488d-9438-90442bd490de",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "container-odds"
+    "syncNodeName": "outter-containers-portrait"
   }
 }
