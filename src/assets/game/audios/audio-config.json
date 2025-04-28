@@ -1,58 +1,132 @@
 {
-    "head_music": {
+    "home_music": {
         "bundle": "resources",
+        "path": "winning/home_music",
         "isLazyLoad": true
     },
-    "head_en": {
+    "away_music": {
         "bundle": "resources",
+        "path": "winning/away_music",
         "isLazyLoad": true
     },
-    "head_vi": {
+    "home_en": {
         "bundle": "resources",
+        "path": "winning/home_en",
         "isLazyLoad": true
     },
-    "head_th": {
+    "home_vi": {
         "bundle": "resources",
+        "path": "winning/home_vi",
         "isLazyLoad": true
     },
-    "head_id": {
+    "home_th": {
         "bundle": "resources",
+        "path": "winning/home_th",
         "isLazyLoad": true
     },
-    "head_zh_cn": {
+    "home_id": {
         "bundle": "resources",
+        "path": "winning/home_id",
         "isLazyLoad": true
     },
-    "head_zh_tw": {
+    "home_zh_cn": {
         "bundle": "resources",
+        "path": "winning/home_zh_cn",
         "isLazyLoad": true
     },
-    "tail_en": {
+    "home_zh_tw": {
         "bundle": "resources",
+        "path": "winning/home_zh_tw",
         "isLazyLoad": true
     },
-    "tail_vi": {
+    "away_en": {
         "bundle": "resources",
+        "path": "winning/away_en",
         "isLazyLoad": true
     },
-    "tail_th": {
+    "away_vi": {
         "bundle": "resources",
+        "path": "winning/away_vi",
         "isLazyLoad": true
     },
-    "tail_id": {
+    "away_th": {
         "bundle": "resources",
+        "path": "winning/away_th",
         "isLazyLoad": true
     },
-    "tail_zh_cn": {
+    "away_id": {
         "bundle": "resources",
+        "path": "winning/away_id",
         "isLazyLoad": true
     },
-    "tail_zh_tw": {
+    "away_zh_cn": {
         "bundle": "resources",
+        "path": "winning/away_zh_cn",
         "isLazyLoad": true
     },
-    "tail_music": {
+    "away_zh_tw": {
         "bundle": "resources",
+        "path": "winning/away_zh_tw",
+        "isLazyLoad": true
+    },
+    "ars_vi": {
+        "bundle": "resources",
+        "path": "winning/team/ars_vi",
+        "isLazyLoad": true
+    },
+    "ars_en": {
+        "bundle": "resources",
+        "path": "winning/team/ars_en",
+        "isLazyLoad": true
+    },
+    "ars_zh_cn": {
+        "bundle": "resources",
+        "path": "winning/team/ars_zh_cn",
+        "isLazyLoad": true
+    },
+    "ars_zh_tw": {
+        "bundle": "resources",
+        "path": "winning/team/ars_zh_tw",
+        "isLazyLoad": true
+    },
+    "ars_th": {
+        "bundle": "resources",
+        "path": "winning/team/ars_th",
+        "isLazyLoad": true
+    },
+    "ars_id": {
+        "bundle": "resources",
+        "path": "winning/team/ars_id",
+        "isLazyLoad": true
+    },
+    "mc_en": {
+        "bundle": "resources",
+        "path": "winning/team/mc_en",
+        "isLazyLoad": true
+    },
+    "mc_vi": {
+        "bundle": "resources",
+        "path": "winning/team/mc_vi",
+        "isLazyLoad": true
+    },
+    "mc_zh_cn": {
+        "bundle": "resources",
+        "path": "winning/team/mc_zh_cn",
+        "isLazyLoad": true
+    },
+    "mc_zh_tw": {
+        "bundle": "resources",
+        "path": "winning/team/mc_zh_tw",
+        "isLazyLoad": true
+    },
+    "mc_th": {
+        "bundle": "resources",
+        "path": "winning/team/mc_th",
+        "isLazyLoad": true
+    },
+    "mc_id": {
+        "bundle": "resources",
+        "path": "winning/team/mc_id",
         "isLazyLoad": true
     }
 }

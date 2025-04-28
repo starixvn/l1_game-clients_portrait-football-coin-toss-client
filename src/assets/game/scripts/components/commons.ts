@@ -7,5 +7,7 @@ export class MatchConfig {
     away: string;
 }
 
-export class LastMatchConfig extends MatchConfig {
- }
+export class IFootballCoinTossResult {
+    home: boolean;
+    away: boolean;
+}

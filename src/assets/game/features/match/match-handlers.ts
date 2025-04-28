@@ -1,6 +1,6 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
-import { LastMatchConfig, MatchConfig } from "../../scripts/components/commons";
+import { MatchConfig } from "../../scripts/components/commons";
 import { MatchStore } from "./match-store";
 export type MatchHistory = gc.RoundHistories.RoundHistory & {
     match: MatchConfig;

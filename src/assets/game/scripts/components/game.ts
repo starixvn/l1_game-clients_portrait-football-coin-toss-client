@@ -1,11 +1,11 @@
 import "./../../../resources/i18n";
 
 import gc from "@sg/game-client-base";
-import { _decorator, Node, Label, Skeleton, sp } from "cc";
+import { _decorator, Node, Label, sp } from "cc";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { startGame } from "db://shared-components/shared/scripts/startup";
-import { FunctionUtils, isIOS } from "db://shared-components/shared/utils";
+import { FunctionUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { CoinTossWinningResult } from "./coin-toss-winning-result";
 import { FlipCoin } from "./flip-coin";
@@ -14,14 +14,14 @@ import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions, settings } from "../game-settings";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { MatchStore } from "../../features/match/match-store";
-import { MatchConfig } from "./commons";
+import { MatchConfig, IFootballCoinTossResult } from "./commons";
 import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
 
 const { ccclass, property } = _decorator;
-const { observer, render } = Observer;
+const { observer, render, handle } = Observer;
 
 type ResultSoundInfo = {
     soundId: string;
@@ -54,8 +54,8 @@ export default class Game extends GameComponent {
     override containerOptions = containerOptions;
     isLoading = true;
 
-    private readonly winningSounds = { head: "head", tail: "tail" };
-    private readonly winningMusic = { head: "head_music", tail: "tail_music" };
+    private readonly winningSounds = { home: "home", away: "away" };
+    private readonly winningMusic = { home: "home_music", away: "away_music" };
 
     protected clientRoundId = -1;
     protected resultSoundIds: ResultSoundInfo[] = [];
@@ -67,89 +67,15 @@ export default class Game extends GameComponent {
     @property(Node)
     nodeAudioContainer: Node = null;
 
-    //compPlate: Plate = null;
-    // protected enableFixHandleFinish = true;
-    // private winningResult: WinningResult = null;
-    // private soundWinChoice = ["odd", "even"];
-    private currentFinish: gc.GameServiceMessage.Finish = null;
     private nextMatchSkeleton: sp.SkeletonData;
-    
+
     private getPathAnimToss(path: string) {
         return `matches/${path}/toss/coin_toss`;
     }
 
     private readonly pathAnimTossDefault = this.getPathAnimToss("HOME-AWAY");
-    // onLoad() {
-    //     this.compPlate = this.nodePlate.getComponent(Plate);
-    //     this.winningResult = this.nodeWinning.getComponent(WinningResult);
-    //     super.onLoad();
-    // }
 
-    // async showResult(
-    //     result: gc.GameServiceMessage.TResult,
-    //     hasAnimation: boolean,
-    //     settlementResult: gc.GameServiceMessage.TSettlementResult
-    // ) {
-    //     if (result) {
-    //         this.compPlate.setDots(result as IResult);
-    //         await this.compPlate.openPlate(hasAnimation);
-    //         this.winningResult.setSettlementResult(settlementResult);
-    //         this.winningResult.show();
-
-    //         const winChoice = this.soundWinChoice.find((choice) => settlementResult[choice]);
-    //         this.playSound(`${winChoice}_wins_${gc.Translator.getLanguageId()}`);
-    //     }
-    // }
-
-    // async renderCurrentFinish(currentFinish: gc.GameServiceMessage.Finish) {
-    //     this.currentFinish = currentFinish;
-    //     if (!currentFinish || !this.enableFixHandleFinish) {
-    //         return;
-    //     }
-    //     const { result, settlementResult } = currentFinish as any;
-
-    //     if (!this.isValidResult(result, settlementResult)) {
-    //         return;
-    //     }
-    //     if (isIOS()) {
-    //         await FunctionUtils.delay(800);
-    //     }
-
-    //     this.showResult(result, true, settlementResult).then(() => {
-    //         this.finishShowResult(result, settlementResult);
-    //         this.chipFlying.callActionPayChips();
-    //     });
-    //     this.playSound(gc.Audios.AudioIds.RECEIVE_FINISH);
-    // }
-
-    // @render(RoundHistories.RoundHistoryStore, (store) => store.firstJoinGameHistory)
-    // async renderStaticResult(firstJoinGameHistory: gc.RoundHistories.IFirstJoinGameHistory) {
-    //     if (!firstJoinGameHistory) {
-    //         return;
-    //     }
-    //     const roundTime = firstJoinGameHistory.roundTime;
-
-    //     const lastRound = firstJoinGameHistory.roundHistory as any;
-    //     if (lastRound) {
-    //         const { result, settlementResult } = lastRound;
-    //         if (firstJoinGameHistory.animationHighlight) {
-    //             if (roundTime === 0) {
-    //                 await FunctionUtils.delay(1000);
-    //                 if (this.currentFinish) {
-    //                     return;
-    //                 }
-    //                 this.showResult(result, false, settlementResult);
-    //             } else {
-    //                 this.showResult(result, false, settlementResult);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // @render(Rounds.RoundTimeStore, (store) => store.isStartingRound)
-    // disableWinNotice(isStartingRound: boolean) {
-    //     isStartingRound && this.winningResult.hideQuickly();
-    // }
+    private match: MatchConfig;
 
     onLoad() {
         super.onLoad();
@@ -176,11 +102,10 @@ export default class Game extends GameComponent {
         }
     }
 
-
     @render(MatchStore, (store) => store.match)
     handleMatch(match: MatchConfig) {
         this.loadMatchSkeleton(match);
-
+        this.match = match;
     }
 
     async loadMatchSkeleton(match: MatchConfig) {
@@ -206,9 +131,7 @@ export default class Game extends GameComponent {
         try {
             const skeletonData = await bundleManager.loadAssetsFromBundle<sp.SkeletonData>("resources", path, sp.SkeletonData, null);
 
-            return (
-                skeletonData ?? (await bundleManager.loadAssetsFromBundle("resources", this.pathAnimTossDefault, sp.SkeletonData, null))
-            );
+            return skeletonData ?? (await bundleManager.loadAssetsFromBundle("resources", this.pathAnimTossDefault, sp.SkeletonData, null));
         } catch (error) {
             console.log("Failed to load skeleton data from path: ", path, error.message);
             return null;
@@ -263,8 +186,8 @@ export default class Game extends GameComponent {
         if (isCancelLoadSounds) {
             return;
         }
-        const winOptionName = this.winningSounds[result];
-        const soundId = this.getAudioKeyForLanguage(winOptionName);
+        
+        const soundId = this.generateWinningKey(data as IFootballCoinTossResult);
         if (soundId) {
             const duration = await AudioUtils.getDurationClip(soundId);
 
@@ -288,7 +211,7 @@ export default class Game extends GameComponent {
                 this.flipCoin.playAnim();
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
-    
+
             this.flipCoin.playAnim();
 
             this.highlightResult.hide();
@@ -315,4 +238,15 @@ export default class Game extends GameComponent {
         }
     }
 
+    generateWinningKey(result: IFootballCoinTossResult): string {
+        const key = result?.home ? "home" : "away";
+        const language = Translator.getLanguageId() || "en";
+        const winOptionName = this.match ? this.match[key]?.toLowerCase() : key;
+        return `${winOptionName}_${language}`;
+    }
+
+    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
+    playSoundSound(id: string) {
+        return id;
+    }
 }

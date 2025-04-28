@@ -1,7 +1,7 @@
 import { _decorator, Label, Node, UIOpacity, SpriteAtlas, Sprite } from "cc";
 import { PFBetItem } from "db://shared-components/provably-fair/round-base/scripts/pf-bet-item";
 import gc from "@sg/game-client-base";
-import { LastMatchConfig, MatchConfig } from "./commons";
+import { MatchConfig } from "./commons";
 import Observer from "observer";
 import { MatchStore } from "../../features/match/match-store";
 import { IJoinGameHistory } from "@sg/game-client-base/dist/game/round-histories/round-history-store";
@@ -26,7 +26,7 @@ export class CoinTossBetItem extends PFBetItem {
     lblTeamName: Label = null;
 
     match: MatchConfig = null;
-    lastMatch: LastMatchConfig = null;
+    lastMatch: MatchConfig = null;
 
     public handleHighlightAnim(isActive: boolean) {
         this.lblTotalBet && (this.lblTotalBet.getComponent(UIOpacity).opacity = isActive ? 180 : 255);
@@ -74,7 +74,7 @@ export class CoinTossBetItem extends PFBetItem {
     }
 
     @render(MatchStore, (store) => store.lastMatch)
-    handleLastMatch(lastMatch: LastMatchConfig) {
+    handleLastMatch(lastMatch: MatchConfig) {
         this.lastMatch = lastMatch;
     }
 

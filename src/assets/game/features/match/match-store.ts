@@ -1,13 +1,13 @@
 import inversify from "inversify";
 import mobx from "mobx";
-import { LastMatchConfig, MatchConfig } from "../../scripts/components/commons";
+import { MatchConfig } from "../../scripts/components/commons";
 
 const { injectable } = inversify;
 
 @injectable()
 export class MatchStore {
     private _match: MatchConfig | null = null;
-    private _lastMatch: LastMatchConfig | null = null;
+    private _lastMatch: MatchConfig | null = null;
     constructor() {
         mobx.makeAutoObservable(this);
     }
@@ -24,7 +24,7 @@ export class MatchStore {
         return this._lastMatch;
     }
 
-    set lastMatch(lastMatch: LastMatchConfig) {
+    set lastMatch(lastMatch: MatchConfig) {
         this._lastMatch = lastMatch;
     }
 }
