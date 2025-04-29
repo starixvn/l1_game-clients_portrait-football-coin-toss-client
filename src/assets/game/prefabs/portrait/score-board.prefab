@@ -784,7 +784,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "text-even",
+    "_name": "home-team-lbl",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -1375,7 +1375,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "text-odd",
+    "_name": "away-team-lbl",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -2003,6 +2003,12 @@
     "supportChoices": "home,away",
     "enablePercentage": true,
     "showSignPercentage": true,
+    "lblTeamHome": {
+      "__id__": 32
+    },
+    "lblTeamAway": {
+      "__id__": 60
+    },
     "_id": ""
   },
   {

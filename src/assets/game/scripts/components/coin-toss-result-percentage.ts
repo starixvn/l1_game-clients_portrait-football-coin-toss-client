@@ -1,9 +1,18 @@
 import gc from "@sg/game-client-base";
-import { _decorator } from "cc";
+import { _decorator, Label } from "cc";
+import { getTeamName } from "db://assets/scripts/utils";
 import { ResultPercentage } from "db://shared-components/game/result-percentage/scripts/result-percentage";
-const { ccclass } = _decorator;
+import { MatchConfig } from "./commons";
+
+const { ccclass, property } = _decorator;
 @ccclass
 export class CoinTossResultPercentage extends ResultPercentage {
+    @property({ type: Label })
+    lblTeamHome: Label = null;
+
+    @property({ type: Label })
+    lblTeamAway: Label = null;
+
     calculateWinPercentage(originalChoices: string[], roundHistory: gc.RoundHistories.RoundHistory[]): Record<string, number> {
         const count = super.calculateWin(originalChoices, roundHistory);
         const total = roundHistory.length;
@@ -22,5 +31,12 @@ export class CoinTossResultPercentage extends ResultPercentage {
         percentage["away"] = awayValue;
 
         return percentage;
+    }
+
+    public setTeam(match: MatchConfig) {
+        if (match?.home && match?.away) {
+            this.lblTeamHome.string = getTeamName(match.home);
+            this.lblTeamAway.string = getTeamName(match.away);
+        }
     }
 }

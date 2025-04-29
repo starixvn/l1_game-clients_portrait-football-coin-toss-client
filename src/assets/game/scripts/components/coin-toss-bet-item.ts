@@ -1,13 +1,7 @@
-import { _decorator, Label, Node, UIOpacity, SpriteAtlas, Sprite } from "cc";
+import { _decorator, Label, Node, Sprite, SpriteAtlas, UIOpacity } from "cc";
+import { getTeamName } from "db://assets/scripts/utils";
 import { PFBetItem } from "db://shared-components/provably-fair/round-base/scripts/pf-bet-item";
-import gc from "@sg/game-client-base";
 import { MatchConfig } from "./commons";
-import Observer from "observer";
-import { MatchStore } from "../../features/match/match-store";
-import { IJoinGameHistory } from "@sg/game-client-base/dist/game/round-histories/round-history-store";
-const { Rounds, Translator, RoundHistories } = gc;
-
-const { observer, render } = Observer;
 
 const { ccclass, property } = _decorator;
 
@@ -33,67 +27,13 @@ export class CoinTossBetItem extends PFBetItem {
         this.lblOwnBet && (this.lblOwnBet.getComponent(UIOpacity).opacity = isActive ? 180 : 255);
     }
 
-    @render(Rounds.RoundTimeStore, (store) => store.isWaiting)
-    handleWaiting(isWaiting: boolean) {
-        if (isWaiting) {
-            this.setTeam(this.lastMatch);
-        }
-    }
-
-    @render(RoundHistories.RoundHistoryStore, (store) => store.firstJoinGameHistory)
-    async renderStaticResult(firstJoinGameHistory: gc.RoundHistories.IFirstJoinGameHistory) {
-        if (!firstJoinGameHistory) {
-            return;
-        }
-
-        this.setTeam(this.match);
-    }
-
-    @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
-    handleJoinGame(joinGameHistory: IJoinGameHistory) {
-        if (!joinGameHistory) {
-            return;
-        }
-        const { roundHistory } = joinGameHistory ?? {};
-        if (!roundHistory) {
-            return;
-        }
-        this.setTeam(this.match);
-    }
-
-    @render(Rounds.RoundTimeStore, (store) => store.isStartRound)
-    handleStartRound(isStartRound: boolean) {
-        if (isStartRound) {
-            this.setTeam(this.match);
-        }
-    }
-
-    @render(MatchStore, (store) => store.match)
-    handleMatch(match: MatchConfig) {
-        this.match = match;
-    }
-
-    @render(MatchStore, (store) => store.lastMatch)
-    handleLastMatch(lastMatch: MatchConfig) {
-        this.lastMatch = lastMatch;
-    }
-
-    private setTeam(match: MatchConfig) {
+    public setTeam(match: MatchConfig) {
         if (match?.home && match?.away) {
             const teamType = this.node.name;
             const teamCode = match[teamType];
-            this.lblTeamName.string = this.getTeamName(teamCode);
+            this.lblTeamName.string = getTeamName(teamCode);
             this.loadFlag(teamCode, teamType);
         }
-    }
-
-    private getTeamName(teamCode: string) {
-        const teamTypeText = gc.Translator.gameTranslate(`FootballCoinToss.glossary_${teamCode.toUpperCase()}`);
-        if (teamTypeText.includes("FootballCoinToss.glossary_")) {
-            return "";
-        }
-
-        return teamTypeText.toUpperCase();
     }
 
     private loadFlag(teamCode: string, teamType: string) {

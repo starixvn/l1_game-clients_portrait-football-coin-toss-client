@@ -1,6 +1,8 @@
 import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
 import { BetItemsPolygon } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
+import { MatchConfig } from "./commons";
+import { CoinTossBetItem } from "./coin-toss-bet-item";
 
 const { ccclass } = _decorator;
 
@@ -14,5 +16,13 @@ export class CoinTossBetItems extends BetItemsPolygon {
                 betItem.handleHighlightAnim(!this.isWinning(+settlementResult?.[choice]) && isAnim);
             });
         }
+    }
+
+    public setTeam(match: MatchConfig) {
+        console.log("setTeam", match);
+        this.betItemComponents.forEach((betItem) => {
+            const coinTossBetItem = betItem.getComponent(CoinTossBetItem);
+            coinTossBetItem.setTeam(match);
+        });
     }
 }

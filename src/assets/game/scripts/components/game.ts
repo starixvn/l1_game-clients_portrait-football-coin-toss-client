@@ -16,6 +16,8 @@ import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { MatchStore } from "../../features/match/match-store";
 import { MatchConfig, IFootballCoinTossResult } from "./commons";
 import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
+import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
+import { CoinTossBetItems } from "./coin-toss-bet-items";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
@@ -46,13 +48,21 @@ export default class Game extends GameComponent {
     @property({ type: Node })
     highlightResultNode: Node = null;
 
+    @property({ type: Node })
+    resultPercentageNode: Node = null;
+
+    @property({ type: Node })
+    betItemsNode: Node = null;
+
     private winningResult: CoinTossWinningResult = null;
     private flipCoin: FlipCoin = null;
     private highlightResult: HighlightResult = null;
+    private resultPercentage: CoinTossResultPercentage = null;
+    private betItems: CoinTossBetItems = null;
 
     override namespace = settings.name;
     override containerOptions = containerOptions;
-    isLoading = true;
+    isLoading = true;    
 
     private readonly winningSounds = { home: "home", away: "away" };
     private readonly winningMusic = { home: "home_music", away: "away_music" };
@@ -75,7 +85,8 @@ export default class Game extends GameComponent {
 
     private readonly pathAnimTossDefault = this.getPathAnimToss("HOME-AWAY");
 
-    private match: MatchConfig;
+    match: MatchConfig = null;
+    lastMatch: MatchConfig = null;
 
     onLoad() {
         super.onLoad();
@@ -88,6 +99,8 @@ export default class Game extends GameComponent {
         this.winningResult = this.winningResultNode.getComponent(CoinTossWinningResult);
         this.flipCoin = this.flipCoinNode.getComponent(FlipCoin);
         this.highlightResult = this.highlightResultNode.getComponent(HighlightResult);
+        this.resultPercentage = this.resultPercentageNode.getComponent(CoinTossResultPercentage);
+        this.betItems = this.betItemsNode.getComponent(CoinTossBetItems);
     }
 
     @render(Rounds.RoundStore, (store) => store.clientRoundId)
@@ -107,6 +120,36 @@ export default class Game extends GameComponent {
         this.loadMatchSkeleton(match);
         this.match = match;
     }
+
+    @render(MatchStore, (store) => store.lastMatch)
+    handleLastMatch(lastMatch: MatchConfig) {
+        this.lastMatch = lastMatch;
+    }
+
+    @render(Rounds.RoundTimeStore, (store) => store.isWaiting)
+    handleWaiting(isWaiting: boolean) {
+        if (isWaiting) {
+            this.setTeam();
+        }
+    }
+
+    private setTeam(){
+        this.resultPercentage.setTeam(this.match);
+        this.betItems.setTeam(this.match);
+    }
+
+    @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
+    handleJoinGame(joinGameHistory: gc.RoundHistories.IJoinGameHistory) {
+        if (!joinGameHistory) {
+            return;
+        }
+        const { roundHistory } = joinGameHistory ?? {};
+        if (!roundHistory) {
+            return;
+        }
+        this.setTeam();
+    }
+
 
     async loadMatchSkeleton(match: MatchConfig) {
         if (match?.home && match?.away) {
@@ -216,6 +259,7 @@ export default class Game extends GameComponent {
 
             this.highlightResult.hide();
             this.resultSoundIds = [];
+            this.setTeam();
         }
     }
 
@@ -229,6 +273,8 @@ export default class Game extends GameComponent {
         if (!firstJoinGameHistory) {
             return;
         }
+
+        this.setTeam();
 
         const { animationHighlight, roundTime, roundHistory: lastRound } = firstJoinGameHistory;
         if (lastRound && animationHighlight && roundTime > 0) {
