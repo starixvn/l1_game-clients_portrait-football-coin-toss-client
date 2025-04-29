@@ -1,1 +1,1 @@
-window.crossConfig = { backgroundLocalized: false, storagePrefixKey: "portrait_sedie" };
+window.crossConfig = { backgroundLocalized: false, storagePrefixKey: "portrait_football_coin_toss" };

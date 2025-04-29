@@ -19,7 +19,6 @@ export class CoinTossBetItems extends BetItemsPolygon {
     }
 
     public setTeam(match: MatchConfig) {
-        console.log("setTeam", match);
         this.betItemComponents.forEach((betItem) => {
             const coinTossBetItem = betItem.getComponent(CoinTossBetItem);
             coinTossBetItem.setTeam(match);
