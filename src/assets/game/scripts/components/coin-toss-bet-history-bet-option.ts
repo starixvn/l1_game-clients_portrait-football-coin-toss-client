@@ -27,7 +27,8 @@ export default class SeDieBetHistoryBetOption extends Component {
     handleBetOptionItem(choice: string, odd: string, stake: string, match: MatchConfig) {
         const choiceStr = this.convertChoiceData(choice);
         const teamCode = match[choice];
-        this.choice.string = `${gc.Translator.gameTranslate(`glossary_${teamCode}`)} @ ${odd}`;
+        
+        this.choice.string = `${gc.Translator.gameTranslate(`glossary_${teamCode}`)}\n@ ${odd}`;
         this.stake.string = stake;
     }
 
