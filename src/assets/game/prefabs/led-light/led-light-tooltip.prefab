@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 454.58984375,
+      "width": 94.640625,
       "height": 64
     },
     "_anchorPoint": {
@@ -432,8 +432,8 @@
     },
     "_alignFlags": 45,
     "_target": null,
-    "_left": -158.294921875,
-    "_right": -158.294921875,
+    "_left": 21.6796875,
+    "_right": 21.6796875,
     "_top": 3.9659999999999997,
     "_bottom": -3.9659999999999997,
     "_horizontalCenter": 0,
@@ -615,7 +615,7 @@
     "_overflow": 0,
     "_enableWrapText": true,
     "_font": {
-      "__uuid__": "41a12541-a4db-4259-b803-4c477054c858",
+      "__uuid__": "0b9efa3d-c517-4301-af5b-ac67552528db",
       "__expectedType__": "cc.TTFFont"
     },
     "_isSystemFontUsed": false,
