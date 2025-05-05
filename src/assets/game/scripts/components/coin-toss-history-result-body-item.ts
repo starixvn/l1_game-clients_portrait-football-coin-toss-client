@@ -20,9 +20,6 @@ export class CoinTossHistoryResultBodyItem extends BaseResultBodyItem {
         if (!match) {
             return;
         }
-        console.log("settlementResult", settlementResult);
-        console.log("result", result);
-        console.log("match", match);
         const resultKey = result.home ? "home" : "away";
         const teamCode = match[resultKey];
         this.flagSprite.spriteFrame = this.flagsAtlas.getSpriteFrame(`result-${teamCode.toLowerCase()}`);
