@@ -1208,7 +1208,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 74.12843749999996,
+      "x": 30.170000000000016,
       "y": 0,
       "z": 0
     },
@@ -1258,7 +1258,7 @@
       "a": 255
     },
     "_string": "Bet Choice",
-    "_horizontalAlign": 1,
+    "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 44,
     "_fontSize": 44,
@@ -1325,7 +1325,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_id": ""
@@ -1388,11 +1388,11 @@
     "__prefab": {
       "__id__": 79
     },
-    "_alignFlags": 32,
+    "_alignFlags": 8,
     "_target": {
       "__id__": 1
     },
-    "_left": 0.5324240966624599,
+    "_left": 0.5364371980676329,
     "_right": 0.34,
     "_top": 0,
     "_bottom": 0,
@@ -1404,7 +1404,7 @@
     "_isAbsBottom": true,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
-    "_originalWidth": 111.3984375,
+    "_originalWidth": 233.40625,
     "_originalHeight": 0,
     "_alignMode": 1,
     "_lockFlags": 0,
