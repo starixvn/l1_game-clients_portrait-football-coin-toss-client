@@ -920,7 +920,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 194.8,
-      "y": 474.5,
+      "y": 484.5,
       "z": 0
     }
   },
@@ -938,7 +938,7 @@
     "propertyPath": [
       "_top"
     ],
-    "value": 25
+    "value": 15
   },
   {
     "__type__": "cc.TargetInfo",
