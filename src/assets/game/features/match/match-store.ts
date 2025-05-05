@@ -8,6 +8,9 @@ const { injectable } = inversify;
 export class MatchStore {
     private _match: MatchConfig | null = null;
     private _lastMatch: MatchConfig | null = null;
+    private _home: string;
+    private _away: string;
+
     constructor() {
         mobx.makeAutoObservable(this);
     }
@@ -17,7 +20,17 @@ export class MatchStore {
     }
 
     set match(match: MatchConfig) {
+        this._home = match?.home;
+        this._away = match?.away;
         this._match = match;
+    }
+
+    get home(): string {
+        return this._home;
+    }
+
+    get away(): string {
+        return this._away;
     }
 
     get lastMatch() {
