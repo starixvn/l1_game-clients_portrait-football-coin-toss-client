@@ -2301,14 +2301,14 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "highlight-anim",
+    "_name": "bg-lose",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
       "__id__": 28
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 102
@@ -2849,6 +2849,9 @@
       "g": 58,
       "b": 53,
       "a": 255
+    },
+    "bgLose": {
+      "__id__": 101
     },
     "flag": {
       "__id__": 38
@@ -4560,14 +4563,14 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "highlight-anim",
+    "_name": "bg-lose",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
       "__id__": 124
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 200
@@ -4659,7 +4662,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "8a801915-5eb8-4994-9d27-f06f014ade87@377de",
+      "__uuid__": "8a801915-5eb8-4994-9d27-f06f014ade87@a25e4",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 1,
@@ -5108,6 +5111,9 @@
       "g": 58,
       "b": 53,
       "a": 255
+    },
+    "bgLose": {
+      "__id__": 199
     },
     "flag": {
       "__id__": 134
