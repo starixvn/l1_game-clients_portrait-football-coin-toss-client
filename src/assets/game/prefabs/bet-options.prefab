@@ -968,7 +968,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a12525f6-6ace-4f3a-a698-02f31c3749b9@122b1",
+      "__uuid__": "f975c7f7-ea66-4dd4-b635-c96d22f0bdf1@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -2853,9 +2853,9 @@
     "flag": {
       "__id__": 38
     },
-    "flagsAtlas": {
-      "__uuid__": "a12525f6-6ace-4f3a-a698-02f31c3749b9",
-      "__expectedType__": "cc.SpriteAtlas"
+    "flagDefault": {
+      "__uuid__": "f975c7f7-ea66-4dd4-b635-c96d22f0bdf1@f9941",
+      "__expectedType__": "cc.SpriteFrame"
     },
     "lblTeamName": {
       "__id__": 44
@@ -3206,7 +3206,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a12525f6-6ace-4f3a-a698-02f31c3749b9@e340f",
+      "__uuid__": "03d96434-61d3-4280-b6ed-4c5848460513@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -5112,9 +5112,9 @@
     "flag": {
       "__id__": 134
     },
-    "flagsAtlas": {
-      "__uuid__": "a12525f6-6ace-4f3a-a698-02f31c3749b9",
-      "__expectedType__": "cc.SpriteAtlas"
+    "flagDefault": {
+      "__uuid__": "03d96434-61d3-4280-b6ed-4c5848460513@f9941",
+      "__expectedType__": "cc.SpriteFrame"
     },
     "lblTeamName": {
       "__id__": 140
@@ -5222,6 +5222,7 @@
       "__id__": 0
     },
     "fileId": "e0Uw0CPhxLf4oPh3eRsagv",
+    "instance": null,
     "targetOverrides": []
   }
 ]
