@@ -1,10 +1,13 @@
-import { _decorator, Label, Node, Sprite, SpriteAtlas, UIOpacity } from "cc";
+import gc from "@sg/game-client-base";
+import { _decorator, Label, Node, Sprite, SpriteFrame } from "cc";
 import { getTeamName } from "db://assets/scripts/utils";
 import { PFBetItem } from "db://shared-components/provably-fair/round-base/scripts/pf-bet-item";
 import { MatchConfig } from "./commons";
+import Observer from "observer";
+import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 
 const { ccclass, property } = _decorator;
-
+const { render } = Observer;
 @ccclass("CoinTossBetItem")
 export class CoinTossBetItem extends PFBetItem {
     @property({ type: Node, override: true, visible: false })
@@ -13,19 +16,14 @@ export class CoinTossBetItem extends PFBetItem {
     @property(Sprite)
     flag: Sprite = null;
 
-    @property(SpriteAtlas)
-    flagsAtlas: SpriteAtlas = null;
+    @property(SpriteFrame)
+    flagDefault: SpriteFrame = null;
 
     @property(Label)
     lblTeamName: Label = null;
 
     match: MatchConfig = null;
     lastMatch: MatchConfig = null;
-
-    public handleHighlightAnim(isActive: boolean) {
-        this.lblTotalBet && (this.lblTotalBet.getComponent(UIOpacity).opacity = isActive ? 180 : 255);
-        this.lblOwnBet && (this.lblOwnBet.getComponent(UIOpacity).opacity = isActive ? 180 : 255);
-    }
 
     public setTeam(match: MatchConfig) {
         if (match?.home && match?.away) {
@@ -36,8 +34,15 @@ export class CoinTossBetItem extends PFBetItem {
         }
     }
 
-    private loadFlag(teamCode: string, teamType: string) {
-        const spriteFrame = this.flagsAtlas.getSpriteFrame(teamCode.toLowerCase());
-        this.flag.spriteFrame = spriteFrame ?? this.flagsAtlas.getSpriteFrame(teamType);
+    private async loadFlag(teamCode: string, teamType: string) {
+        const spriteFrame = await bundleManager.loadAssetsFromBundle<SpriteFrame>("resources", `flags/${teamCode.toLowerCase()}/spriteFrame`, SpriteFrame, null);
+        this.flag.spriteFrame = spriteFrame ?? this.flagDefault;
+    }
+
+    @render(gc.Rounds.RoundTimeStore, (store) => store.isStartRound)
+    handleStartRound(isStartRound: boolean) {
+        if (isStartRound) {
+            this.highlightAnim.active = false;
+        }
     }
 }

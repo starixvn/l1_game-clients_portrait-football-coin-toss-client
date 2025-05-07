@@ -1,7 +1,8 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, Sprite, SpriteAtlas } from "cc";
+import { _decorator, Label, Sprite, SpriteAtlas, SpriteFrame } from "cc";
 import { BaseResultBodyItem } from "db://shared-components/game/bet-history/scripts/components/bet-history-body-item";
 import { MatchConfig } from "./commons";
+import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 
 const { ccclass, property } = _decorator;
 
@@ -10,11 +11,11 @@ export class CoinTossHistoryResultBodyItem extends BaseResultBodyItem {
     @property(Label)
     result: Label = null;
 
-    @property(SpriteAtlas)
-    flagsAtlas: SpriteAtlas = null;
-
     @property(Sprite)
     flagSprite: Sprite = null;
+
+    @property(SpriteFrame)
+    flagDefault: SpriteFrame = null;
 
     setData(result: gc.BetHistory.DynamicObject<object>, settlementResult: gc.BetHistory.DynamicObject<boolean>, match: MatchConfig) {
         if (!match) {
@@ -22,7 +23,10 @@ export class CoinTossHistoryResultBodyItem extends BaseResultBodyItem {
         }
         const resultKey = result.home ? "home" : "away";
         const teamCode = match[resultKey];
-        this.flagSprite.spriteFrame = this.flagsAtlas.getSpriteFrame(`result-${teamCode.toLowerCase()}`);
+        bundleManager.loadAssetsFromBundle<SpriteFrame>("resources", `flags/${teamCode.toLowerCase()}/spriteFrame`, SpriteFrame, null).then( spriteFrame=>{
+            this.flagSprite.spriteFrame = spriteFrame ?? this.flagDefault;
+        });
+
         this.result.string = gc.Translator.translate(`FootballCoinToss.glossary_${teamCode}`);
     }
 }

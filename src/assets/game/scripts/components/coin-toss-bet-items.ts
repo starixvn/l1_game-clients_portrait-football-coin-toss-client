@@ -24,4 +24,10 @@ export class CoinTossBetItems extends BetItemsPolygon {
             coinTossBetItem.setTeam(match);
         });
     }
+    public showLoseBG(result: gc.GameServiceMessage.TResult) {
+        this.betItemComponents.forEach((betItem) => {
+            const choice = betItem.node.name;
+            betItem.handleHighlightAnim(!this.isWinning(+result?.[choice]));
+        });
+    }
 }

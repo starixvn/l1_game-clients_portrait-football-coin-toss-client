@@ -1,7 +1,7 @@
 import "./../../../resources/i18n";
 
 import gc from "@sg/game-client-base";
-import { _decorator, Node, Label, sp } from "cc";
+import { _decorator, Node, Label, sp, SpriteFrame, Asset } from "cc";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { startGame } from "db://shared-components/shared/scripts/startup";
@@ -18,6 +18,7 @@ import { MatchConfig, IFootballCoinTossResult } from "./commons";
 import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
 import { CoinTossBetItems } from "./coin-toss-bet-items";
+import { error } from "console";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
@@ -62,7 +63,7 @@ export default class Game extends GameComponent {
 
     override namespace = settings.name;
     override containerOptions = containerOptions;
-    isLoading = true;    
+    isLoading = true;
 
     private readonly winningSounds = { home: "home", away: "away" };
     private readonly winningMusic = { home: "home_music", away: "away_music" };
@@ -118,6 +119,7 @@ export default class Game extends GameComponent {
     @render(MatchStore, (store) => store.match)
     handleMatch(match: MatchConfig) {
         this.loadMatchSkeleton(match);
+        this.loadMatchFlag(match);
         this.match = match;
     }
 
@@ -133,7 +135,7 @@ export default class Game extends GameComponent {
         }
     }
 
-    private setTeam(){
+    private setTeam() {
         this.resultPercentage.setTeam(this.match);
         this.betItems.setTeam(this.match);
     }
@@ -150,15 +152,32 @@ export default class Game extends GameComponent {
         this.setTeam();
     }
 
-
-    async loadMatchSkeleton(match: MatchConfig) {
+    private async loadMatchSkeleton(match: MatchConfig) {
         if (match?.home && match?.away) {
             const resourcePath = `${match?.home.toUpperCase()}-${match?.away.toUpperCase()}`;
             await this.loadResourcesAnim(resourcePath);
         }
     }
 
-    async loadResourcesAnim(resourcePath: string) {
+    private async loadMatchFlag(match: MatchConfig) {
+        if (match?.home && match?.away) {
+            const resourcePaths = [match.home, match.away, `result-${match.home}`, `result-${match.away}`];
+            const resourcePathImages = resourcePaths.map((path) => `flags/${path.toLowerCase()}/spriteFrame`);
+            await this.preloadResourcesImages(resourcePathImages);
+        }
+    }
+
+    private async preloadResourcesImages(resourcePathImages: string[]) {
+        resourcePathImages.forEach(async (path) => {
+            try {
+                await bundleManager.loadAssetsFromBundle<SpriteFrame>("resources", path, SpriteFrame, null);
+            } catch (error) {
+                console.log("Failed to load images from path: ", path, error.message);
+            }
+        });
+    }
+
+    private async loadResourcesAnim(resourcePath: string) {
         const customPath = this.getPathAnimToss(resourcePath);
 
         try {
@@ -197,6 +216,7 @@ export default class Game extends GameComponent {
         this.playWinningSound();
         super.finishShowResult(result, settlementResult);
         this.chipFlying.callActionPayChips();
+        this.betItems.handleHighlightStatic({ result, settlementResult });
     }
 
     async showResult(result: gc.GameServiceMessage.TResult, hasAnimation: boolean) {
@@ -229,7 +249,7 @@ export default class Game extends GameComponent {
         if (isCancelLoadSounds) {
             return;
         }
-        
+
         const soundId = this.generateWinningKey(data as IFootballCoinTossResult);
         if (soundId) {
             const duration = await AudioUtils.getDurationClip(soundId);
@@ -279,6 +299,7 @@ export default class Game extends GameComponent {
         const { animationHighlight, roundTime, roundHistory: lastRound } = firstJoinGameHistory;
         if (lastRound && animationHighlight && roundTime > 0) {
             const { result } = lastRound;
+            this.betItems.showLoseBG(result);
             this.flipCoin.setStatusNode(false);
             this.highlightResult.show(result);
         }
