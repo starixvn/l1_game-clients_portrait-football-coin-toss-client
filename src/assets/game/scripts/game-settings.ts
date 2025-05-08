@@ -2,7 +2,7 @@ import gc from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
 import { sharedContainer } from "../../scripts/shared-container";
 import * as Match from "../features/match";
-import { FinishedShowResult, NoticeHandlers } from "../handlers/override";
+import { FinishedShowResult, NoticeHandlers, JoinGameHandler, GameConfigHandlers } from "../handlers/override";
 
 export const settings = {
     id: 93,
@@ -24,6 +24,8 @@ export const containerOptions: gc.IContainerOptions = {
         container.bind(gc.GameConfigs.GameSetting).toConstantValue(settings);
         container.bind(gc.Settlements.SettlementUIHandlers.FinishedShowResult).to(FinishedShowResult);
         container.bind(gc.Notices.NoticeHandlers).to(NoticeHandlers);
+        container.bind(gc.JoinGame.JoinGameHandler).to(JoinGameHandler);
+        container.bind(gc.GameConfigs.GameConfigHandlers).to(GameConfigHandlers);
         container.bind(LogStore).to(LogStore);
     },
 

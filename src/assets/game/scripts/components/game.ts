@@ -19,6 +19,8 @@ import { bundleManager } from "db://shared-components/shared/common-components/b
 import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
 import { CoinTossBetItems } from "./coin-toss-bet-items";
 import { error } from "console";
+import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
+import { UpdateLoadingHandler } from "../../handlers/update-loading-handler";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
@@ -80,14 +82,10 @@ export default class Game extends GameComponent {
 
     private nextMatchSkeleton: sp.SkeletonData;
 
-    private getPathAnimToss(path: string) {
-        return `matches/${path}/toss/coin_toss`;
-    }
-
-    private readonly pathAnimTossDefault = this.getPathAnimToss("HOME-AWAY");
-
     match: MatchConfig = null;
     lastMatch: MatchConfig = null;
+
+    private loadingSkeletonData = false;
 
     onLoad() {
         super.onLoad();
@@ -117,10 +115,11 @@ export default class Game extends GameComponent {
     }
 
     @render(MatchStore, (store) => store.match)
-    handleMatch(match: MatchConfig) {
-        this.loadMatchSkeleton(match);
-        this.loadMatchFlag(match);
+    async handleMatch(match: MatchConfig) {
         this.match = match;
+        await this.loadMatchFlag(match);
+        await this.loadMatchSkeleton(match);
+        this.handleUpdateLoading();
     }
 
     @render(MatchStore, (store) => store.lastMatch)
@@ -138,6 +137,9 @@ export default class Game extends GameComponent {
     private setTeam() {
         this.resultPercentage.setTeam(this.match);
         this.betItems.setTeam(this.match);
+        loadSkeletonData(getMatchAnimResource(this.match)).then((skeletonData) => {
+            skeletonData && this.updateSkeletonData(skeletonData);
+        });
     }
 
     @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
@@ -154,8 +156,7 @@ export default class Game extends GameComponent {
 
     private async loadMatchSkeleton(match: MatchConfig) {
         if (match?.home && match?.away) {
-            const resourcePath = `${match?.home.toUpperCase()}-${match?.away.toUpperCase()}`;
-            await this.loadResourcesAnim(resourcePath);
+            await this.preloadResourcesAnim(match);
         }
     }
 
@@ -177,27 +178,22 @@ export default class Game extends GameComponent {
         });
     }
 
-    private async loadResourcesAnim(resourcePath: string) {
-        const customPath = this.getPathAnimToss(resourcePath);
-
-        try {
-            const skeletonData = await this.loadSkeletonData(customPath);
-            skeletonData && this.updateSkeletonData(skeletonData);
-        } catch (error) {
-            console.log("Not found skeleton data into path: ", resourcePath, error.message);
-            const skeletonData = await this.loadSkeletonData(this.pathAnimTossDefault);
-            skeletonData && this.updateSkeletonData(skeletonData);
-        }
+    @handle(UpdateLoadingHandler)
+    handleUpdateLoading() {
+        console.log("handleUpdateLoading");
+        this.isLoading = false;
     }
-    private async loadSkeletonData(path: string): Promise<sp.SkeletonData | null> {
-        try {
-            const skeletonData = await bundleManager.loadAssetsFromBundle<sp.SkeletonData>("resources", path, sp.SkeletonData, null);
 
-            return skeletonData ?? (await bundleManager.loadAssetsFromBundle("resources", this.pathAnimTossDefault, sp.SkeletonData, null));
+    private async preloadResourcesAnim(match: MatchConfig) {
+        const pathAnimToss = getMatchAnimResource(match);
+        this.loadingSkeletonData = true;
+
+        try {
+            await loadSkeletonData(pathAnimToss);
         } catch (error) {
-            console.log("Failed to load skeleton data from path: ", path, error.message);
-            return null;
+            console.log("Not found skeleton data into path: ", pathAnimToss, error.message);
         }
+        this.loadingSkeletonData = false;
     }
 
     private updateSkeletonData(skeletonData: sp.SkeletonData) {
@@ -275,8 +271,6 @@ export default class Game extends GameComponent {
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
 
-            this.flipCoin.playAnim();
-
             this.highlightResult.hide();
             this.resultSoundIds = [];
             this.setTeam();
@@ -285,6 +279,7 @@ export default class Game extends GameComponent {
 
     @render(gc.App.AppStore, (store) => store.isLoading)
     updateLoading(isLoading: boolean) {
+        console.log("updateLoading", isLoading);
         this.isLoading = isLoading;
     }
 
