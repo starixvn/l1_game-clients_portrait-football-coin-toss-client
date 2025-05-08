@@ -139,8 +139,8 @@ export default class Game extends GameComponent {
         this.betItems.setTeam(this.match);
         loadSkeletonData(getMatchAnimResource(this.match)).then((skeletonData) => {
             skeletonData && this.updateSkeletonData(skeletonData);
+            this.isLoading && this.handleUpdateLoading();
         });
-        this.isLoading && this.handleUpdateLoading();
     }
 
     @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
@@ -266,12 +266,13 @@ export default class Game extends GameComponent {
             this.winningResult.hideQuickly();
             if (this.nextMatchSkeleton) {
                 this.flipCoin.setSkeletonData(this.nextMatchSkeleton);
-                if (this.isLoading) {
-                    this.flipCoin.showHand();
-                } else {
-                    this.flipCoin.playAnim();
-                }
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
+            }
+
+            if (this.isLoading) {
+                this.flipCoin.showHand();
+            } else {
+                this.flipCoin.playAnim();
             }
 
             this.highlightResult.hide();
