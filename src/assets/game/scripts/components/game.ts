@@ -20,7 +20,6 @@ import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
 import { CoinTossBetItems } from "./coin-toss-bet-items";
 import { error } from "console";
 import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
-import { UpdateLoadingHandler } from "../../handlers/update-loading-handler";
 import { th } from "./../../../resources/i18n";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
@@ -86,7 +85,7 @@ export default class Game extends GameComponent {
     match: MatchConfig = null;
     lastMatch: MatchConfig = null;
 
-    private loadingSkeletonData = false;
+    private loadingSkeletonData = true;
 
     onLoad() {
         super.onLoad();
@@ -139,7 +138,7 @@ export default class Game extends GameComponent {
         this.betItems.setTeam(this.match);
         loadSkeletonData(getMatchAnimResource(this.match)).then((skeletonData) => {
             skeletonData && this.updateSkeletonData(skeletonData);
-            this.isLoading && this.handleUpdateLoading();
+            this.loadingSkeletonData = false;
         });
     }
 
@@ -179,19 +178,14 @@ export default class Game extends GameComponent {
         });
     }
 
-    @handle(UpdateLoadingHandler)
-    handleUpdateLoading() {}
-
     private async preloadResourcesAnim(match: MatchConfig) {
         const pathAnimToss = getMatchAnimResource(match);
-        this.loadingSkeletonData = true;
 
         try {
             await loadSkeletonData(pathAnimToss);
         } catch (error) {
             console.log("Not found skeleton data into path: ", pathAnimToss, error.message);
         }
-        this.loadingSkeletonData = false;
     }
 
     private updateSkeletonData(skeletonData: sp.SkeletonData) {
@@ -219,7 +213,7 @@ export default class Game extends GameComponent {
             this.loadSoundResultBeforeRead(result);
 
             this.winningResult.setResult(result);
-            if (hasAnimation && !this.isLoading) {
+            if (hasAnimation && !this.loadingSkeletonData) {
                 await this.winningResult.show();
             }
         }
@@ -269,7 +263,7 @@ export default class Game extends GameComponent {
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
 
-            if (this.isLoading) {
+            if (this.loadingSkeletonData) {
                 this.flipCoin.showHand();
             } else {
                 this.flipCoin.playAnim();
