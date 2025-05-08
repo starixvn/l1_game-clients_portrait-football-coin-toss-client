@@ -9,27 +9,27 @@ declare global {
 
 const defaultConfig: gc.Configs.SiteConfigs = {
     isDev: false, // if this property is true, then you should add token=anything into the querytring to sso to the game http://localhost:7456/?token=anything
-    systemType: "VG",
+    systemType: "HD",
     serverDomainMapper: {
         localhost: "lumigame.com",
     },
     ssl: true,
-    subDomain: "l2-proxy1",
+    subDomain: "hd-proxy",
     env: "LOCAL",
-    subGuideDomain: "l1-guide1",
+    subGuideDomain: "hd-guide",
     SGConnectSubDomain: "connectsite",
     enableMsgpackParserAllGames: false,
     enableMsgpackParserOnNotification: false,
     websocket: {
-        proxyPath: "sedie",
-        route: "sedie",
+        proxyPath: "footballcointoss",
+        route: "footballcointoss",
     },
     websocketOptions: {
         timeout: 3000,
     },
-    mainObserverNamespace: "SeDie",
+    mainObserverNamespace: "FootballCoinToss",
     tolgeeUrl: "",
-    storagePrefixKey: "portrait_sedie",
+    storagePrefixKey: "portrait_football_coin_toss",
 };
 
 let configDev = {
