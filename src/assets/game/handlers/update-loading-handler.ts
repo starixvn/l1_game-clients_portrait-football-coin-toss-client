@@ -10,6 +10,6 @@ export class UpdateLoadingHandler implements IHandler<number> {
     @inject(gc.App.AppStore) protected readonly appStore: gc.App.AppStore;
 
     handle() {
-        this.appStore.isLoading = false;
+        this.appStore.isLoading && (this.appStore.isLoading = false);
     }
 }

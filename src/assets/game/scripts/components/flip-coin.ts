@@ -14,7 +14,7 @@ export class FlipCoin extends Component {
     private readonly animName = "flip";
     private readonly durationFlipCoin = 3;
 
-    init() {
+    showHand() {
         this.skeleton && (this.skeleton.node.active = false);
         this.hand && (this.hand.active = true);
     }

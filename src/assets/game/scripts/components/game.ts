@@ -21,6 +21,7 @@ import { CoinTossBetItems } from "./coin-toss-bet-items";
 import { error } from "console";
 import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
 import { UpdateLoadingHandler } from "../../handlers/update-loading-handler";
+import { th } from "./../../../resources/i18n";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
@@ -91,7 +92,7 @@ export default class Game extends GameComponent {
         super.onLoad();
         this.fetchComponents();
         this.winningResult.hideQuickly();
-        this.flipCoin.init();
+        this.flipCoin.showHand();
     }
 
     fetchComponents() {
@@ -119,7 +120,6 @@ export default class Game extends GameComponent {
         this.match = match;
         await this.loadMatchFlag(match);
         await this.loadMatchSkeleton(match);
-        this.handleUpdateLoading();
     }
 
     @render(MatchStore, (store) => store.lastMatch)
@@ -140,6 +140,7 @@ export default class Game extends GameComponent {
         loadSkeletonData(getMatchAnimResource(this.match)).then((skeletonData) => {
             skeletonData && this.updateSkeletonData(skeletonData);
         });
+        this.isLoading && this.handleUpdateLoading();
     }
 
     @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
@@ -179,10 +180,7 @@ export default class Game extends GameComponent {
     }
 
     @handle(UpdateLoadingHandler)
-    handleUpdateLoading() {
-        console.log("handleUpdateLoading");
-        this.isLoading = false;
-    }
+    handleUpdateLoading() {}
 
     private async preloadResourcesAnim(match: MatchConfig) {
         const pathAnimToss = getMatchAnimResource(match);
@@ -219,8 +217,9 @@ export default class Game extends GameComponent {
         if (result) {
             this.flipCoin.setStatusNode(false);
             this.loadSoundResultBeforeRead(result);
+
             this.winningResult.setResult(result);
-            if (hasAnimation) {
+            if (hasAnimation && !this.isLoading) {
                 await this.winningResult.show();
             }
         }
@@ -267,7 +266,11 @@ export default class Game extends GameComponent {
             this.winningResult.hideQuickly();
             if (this.nextMatchSkeleton) {
                 this.flipCoin.setSkeletonData(this.nextMatchSkeleton);
-                this.flipCoin.playAnim();
+                if (this.isLoading) {
+                    this.flipCoin.showHand();
+                } else {
+                    this.flipCoin.playAnim();
+                }
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
 
@@ -279,7 +282,6 @@ export default class Game extends GameComponent {
 
     @render(gc.App.AppStore, (store) => store.isLoading)
     updateLoading(isLoading: boolean) {
-        console.log("updateLoading", isLoading);
         this.isLoading = isLoading;
     }
 
