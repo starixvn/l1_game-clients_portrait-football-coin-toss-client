@@ -260,10 +260,9 @@ export default class Game extends GameComponent {
                 this.flipCoin.setSkeletonData(this.nextMatchSkeleton);
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
-            
-            console.log("start round")
 
             if (this.firstLoadingSkeletonData) {
+                this.flipCoin.setStatusNode(true);
                 this.flipCoin.showHand();
             } else {
                 this.flipCoin.playAnim();
