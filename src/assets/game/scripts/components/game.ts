@@ -85,7 +85,7 @@ export default class Game extends GameComponent {
     match: MatchConfig = null;
     lastMatch: MatchConfig = null;
 
-    private loadingSkeletonData = true;
+    private firstLoadingSkeletonData = true;
 
     onLoad() {
         super.onLoad();
@@ -136,10 +136,6 @@ export default class Game extends GameComponent {
     private setTeam() {
         this.resultPercentage.setTeam(this.match);
         this.betItems.setTeam(this.match);
-        loadSkeletonData(getMatchAnimResource(this.match)).then((skeletonData) => {
-            skeletonData && this.updateSkeletonData(skeletonData);
-            this.loadingSkeletonData = false;
-        });
     }
 
     @render(RoundHistories.RoundHistoryStore, (store) => store.joinGameHistory)
@@ -182,10 +178,12 @@ export default class Game extends GameComponent {
         const pathAnimToss = getMatchAnimResource(match);
 
         try {
-            await loadSkeletonData(pathAnimToss);
+            const skeletonData = await loadSkeletonData(pathAnimToss);
+            skeletonData && this.updateSkeletonData(skeletonData);
         } catch (error) {
             console.log("Not found skeleton data into path: ", pathAnimToss, error.message);
         }
+        this.firstLoadingSkeletonData && (this.firstLoadingSkeletonData = false);
     }
 
     private updateSkeletonData(skeletonData: sp.SkeletonData) {
@@ -213,7 +211,7 @@ export default class Game extends GameComponent {
             this.loadSoundResultBeforeRead(result);
 
             this.winningResult.setResult(result);
-            if (hasAnimation && !this.loadingSkeletonData) {
+            if (hasAnimation && !this.firstLoadingSkeletonData) {
                 await this.winningResult.show();
             }
         }
@@ -262,8 +260,10 @@ export default class Game extends GameComponent {
                 this.flipCoin.setSkeletonData(this.nextMatchSkeleton);
                 this.winningResult.setSkeletonData(this.nextMatchSkeleton);
             }
+            
+            console.log("start round")
 
-            if (this.loadingSkeletonData) {
+            if (this.firstLoadingSkeletonData) {
                 this.flipCoin.showHand();
             } else {
                 this.flipCoin.playAnim();
