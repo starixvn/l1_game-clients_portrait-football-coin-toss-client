@@ -24,9 +24,6 @@ const defaultConfig: gc.Configs.SiteConfigs = {
         proxyPath: "footballcointoss",
         route: "footballcointoss",
     },
-    websocketOptions: {
-        timeout: 3000,
-    },
     mainObserverNamespace: "FootballCoinToss",
     tolgeeUrl: "",
     storagePrefixKey: "portrait_football_coin_toss",
