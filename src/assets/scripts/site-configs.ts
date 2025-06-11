@@ -24,7 +24,6 @@ const defaultConfig: gc.Configs.SiteConfigs = {
         proxyPath: "footballcointoss",
         route: "footballcointoss",
     },
-    mainObserverNamespace: "FootballCoinToss",
     tolgeeUrl: "",
     storagePrefixKey: "portrait_football_coin_toss",
 };

@@ -1,26 +1,25 @@
 import "./../../../resources/i18n";
 
 import gc from "@sg/game-client-base";
-import { _decorator, Node, Label, sp, SpriteFrame, Asset } from "cc";
+import { _decorator, Label, Node, sp, SpriteFrame } from "cc";
+import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
+import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import { FunctionUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
+import { siteConfigs } from "../../../scripts/site-configs";
+import { MatchStore } from "../../features/match/match-store";
+import { containerOptions } from "../containerOptions";
+import { settings } from "../game-settings";
+import { CoinTossBetItems } from "./coin-toss-bet-items";
+import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
 import { CoinTossWinningResult } from "./coin-toss-winning-result";
+import { IFootballCoinTossResult, MatchConfig } from "./commons";
 import { FlipCoin } from "./flip-coin";
 import { HighlightResult } from "./highlight-result";
-import { siteConfigs } from "../../../scripts/site-configs";
-import { containerOptions, settings } from "../game-settings";
-import { AudioUtils } from "db://shared-components/game/audios/utils";
-import { MatchStore } from "../../features/match/match-store";
-import { MatchConfig, IFootballCoinTossResult } from "./commons";
-import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
-import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
-import { CoinTossBetItems } from "./coin-toss-bet-items";
-import { error } from "console";
-import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
-import { th } from "./../../../resources/i18n";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
