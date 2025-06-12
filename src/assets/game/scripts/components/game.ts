@@ -91,6 +91,7 @@ export default class Game extends GameComponent {
         this.fetchComponents();
         this.winningResult.hideQuickly();
         this.flipCoin.showHand();
+        
     }
 
     fetchComponents() {
