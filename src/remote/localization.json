@@ -5,7 +5,9 @@
         "th": "ฟุตบอลโยนเหรียญ",
         "vi": "Tung Xu Bóng Đá",
         "zh_cn": "足球掷币游戏",
-        "zh_tw": "足球擲幣遊戲"
+        "zh_tw": "足球擲幣遊戲",
+        "ja": "サッカーコイントス",
+        "es": "Flipping Coin Futbol"
     },
     "gameNames": {
         "en": "Soccer Coin Toss",
@@ -13,6 +15,8 @@
         "th": "ฟุตบอลโยนเหรียญ",
         "vi": "Tung Xu Bóng Đá",
         "zh_cn": "足球掷币游戏",
-        "zh_tw": "足球擲幣遊戲"
+        "zh_tw": "足球擲幣遊戲",
+        "ja": "サッカー コイン投げ",
+        "es": "Flipping Coin Fútbol"
     }
 }
