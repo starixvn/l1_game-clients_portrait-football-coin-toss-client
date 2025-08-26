@@ -1,13 +1,9 @@
-import gc from "@sg/game-client-base";
-import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
-import { sharedContainer } from "../../scripts/shared-container";
-import * as Match from "../features/match";
-import { FinishedShowResult, NoticeHandlers } from "../handlers/override";
-
+const GAME_NAME = "FootballCoinToss";
 export const settings = {
     id: 93,
-    name: "FootballCoinToss",
-    namespaces: ["FootballCoinToss"],
+    name: GAME_NAME,
+    observerNamespace: GAME_NAME,
+    namespaces: [GAME_NAME],
     durations: {
         wholeRound: 29,
         lockingBet: 3,
@@ -18,14 +14,3 @@ export const settings = {
     numberOfRoundHistory: 100,
 };
 
-export const containerOptions: gc.IContainerOptions = {
-    globalContainer: sharedContainer,
-    onContainerCreated: (container) => {
-        container.bind(gc.GameConfigs.GameSetting).toConstantValue(settings);
-        container.bind(gc.Settlements.SettlementUIHandlers.FinishedShowResult).to(FinishedShowResult);
-        container.bind(gc.Notices.NoticeHandlers).to(NoticeHandlers);
-        container.bind(LogStore).to(LogStore);
-    },
-
-    features: [Match, gc.BetDetailsNew, gc.RoundBasePF, ...gc.defaultFeatures],
-};
