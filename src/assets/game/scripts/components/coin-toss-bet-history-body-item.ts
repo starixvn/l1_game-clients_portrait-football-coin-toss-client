@@ -57,24 +57,11 @@ export class CoinTossBetHistoryBodyItem extends BetHistoryNewBodyItem {
             });
         }
 
-        if (match) {
-            //TODO: update match data
-        }
-
         if (data.resultPrefab) {
             this.result.removeAllChildren();
             const bodyRow = instantiate(data.resultPrefab);
             bodyRow.getComponent(CoinTossHistoryResultBodyItem)?.setData(result, settlementResult, match);
             this.result.addChild(bodyRow);
-
-            //TODO: update result data
-
-            // if (resultPrefab) {
-            //     const bodyRow = instantiate(resultPrefab);
-            //     const { result, settlementResult } = betHistoryLog;
-            //     bodyRow.getComponent(BaseResultBodyItem)?.setData(result as gc.BetHistory.DynamicObject<object>, settlementResult);
-            //     this.result.addChild(bodyRow);
-            // }
         }
     }
 }

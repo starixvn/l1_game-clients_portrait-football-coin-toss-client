@@ -5,7 +5,7 @@ import { MatchConfig } from "./commons";
 const { property, ccclass } = _decorator;
 
 @ccclass
-export default class SeDieBetHistoryBetOption extends Component {
+export default class CoinTossBetHistoryBetOption extends Component {
     @property(Label)
     choice: Label = null;
 
@@ -25,10 +25,9 @@ export default class SeDieBetHistoryBetOption extends Component {
     }
 
     handleBetOptionItem(choice: string, odd: string, stake: string, match: MatchConfig) {
-        const choiceStr = this.convertChoiceData(choice);
         const teamCode = match[choice];
-        
-        this.choice.string = `${gc.Translator.gameTranslate(`glossary_${teamCode}`)}\n@ ${odd}`;
+        const translatedTeam = gc.Translator.gameTranslate(`glossary_${teamCode}`);
+        this.choice.string = `${translatedTeam}\n@ ${odd}`;
         this.stake.string = stake;
     }
 

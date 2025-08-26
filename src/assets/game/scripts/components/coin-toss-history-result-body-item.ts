@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, Sprite, SpriteAtlas, SpriteFrame } from "cc";
+import { _decorator, Label, Sprite, SpriteFrame } from "cc";
 import { BaseResultBodyItem } from "db://shared-components/game/bet-history/scripts/components/bet-history-body-item";
 import { MatchConfig } from "./commons";
 import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";

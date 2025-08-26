@@ -1,11 +1,11 @@
 import "./../../../resources/i18n";
 
 import gc from "@sg/game-client-base";
-import { _decorator, Node, Label, sp, SpriteFrame, Asset } from "cc";
+import { _decorator, Node, Label, sp, SpriteFrame } from "cc";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { startGame } from "db://shared-components/shared/scripts/startup";
-import { FunctionUtils } from "db://shared-components/shared/utils";
+import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { CoinTossWinningResult } from "./coin-toss-winning-result";
 import { FlipCoin } from "./flip-coin";
@@ -19,9 +19,7 @@ import { MatchConfig, IFootballCoinTossResult } from "./commons";
 import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 import { CoinTossResultPercentage } from "./coin-toss-result-percentage";
 import { CoinTossBetItems } from "./coin-toss-bet-items";
-import { error } from "console";
 import { getMatchAnimResource, loadSkeletonData } from "db://assets/scripts/utils";
-import { th } from "./../../../resources/i18n";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 const { Rounds, Translator, RoundHistories } = gc;
@@ -221,7 +219,7 @@ export default class Game extends GameComponent {
     async playWinningSound() {
         for (const resultSoundInfo of this.resultSoundIds) {
             this.playSound(resultSoundInfo.soundId);
-            await FunctionUtils.delay(resultSoundInfo.duration * 1000);
+            await AnimationUtils.delayTime(resultSoundInfo.duration);
         }
     }
 
