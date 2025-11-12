@@ -26,6 +26,12 @@ const defaultConfig: gc.Configs.SiteConfigs = {
     },
     tolgeeUrl: "",
     storagePrefixKey: "portrait_football_coin_toss",
+    sentry: {
+        dsn: "",
+        browserUrl: "",
+        urlHash: "",
+        ignoreErrors: [],
+    },
 };
 
 let configDev = {
